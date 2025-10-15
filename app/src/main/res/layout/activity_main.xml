@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F1F1"
+    android:padding="16dp"
+    android:textAlignment="center"
+    tools:context=".MainActivity">
+
+    <!-- Campo Nome -->
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/app_titulo"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#0F0F0F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editNome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:autofillHints="name"
+        android:background="@android:drawable/edit_text"
+        android:hint="@string/hint_nome"
+        android:inputType="textPersonName"
+        android:minHeight="55dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo" />
+
+
+    <!-- Campo RA -->
+    <EditText
+        android:id="@+id/editRA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@android:drawable/edit_text"
+        android:digits="0123456789"
+        android:hint="@string/hint_ra"
+        android:inputType="number"
+        android:minHeight="55dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editNome" />
+
+    <LinearLayout
+        android:id="@+id/GradeBar"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editRA">
+
+        <EditText
+            android:id="@+id/editNota1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/hint_ap1"
+            android:inputType="numberDecimal"
+            android:minHeight="55dp"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/editNota2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/hint_ap2"
+            android:inputType="numberDecimal"
+            android:minHeight="55dp"
+            android:padding="12dp" />
+
+
+    </LinearLayout>
+
+
+    <!-- Barra de Botões -->
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/GradeBar">
+
+
+        <Button
+            android:id="@+id/btnInserir"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00FF00"
+            android:text="@string/btn_inserir"
+            android:textColor="#F1F1F1"
+            android:textColorLink="#262525" />
+
+
+        <Button
+            android:id="@+id/btnAtualizar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#0000FF"
+            android:text="@string/btn_atualizar"
+            android:textColor="#F1F1F1"
+            android:textColorLink="#262525" />
+
+
+        <Button
+            android:id="@+id/btnDeletar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#FF0000"
+            android:text="@string/btn_deletar"
+            android:textColor="#F1F1F1"
+            android:textColorLink="#262525" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnListar"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="1"
+        android:backgroundTint="#F190F1"
+        android:text="Listar Alunos"
+        android:textColor="#F1F1F1"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonBar" />
+
+
+    <!-- Lista -->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnListar"
+        app:layout_constraintVertical_bias="0.0"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
