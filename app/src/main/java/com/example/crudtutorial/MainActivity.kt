@@ -10,15 +10,13 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 
-// Classe que gerencia o Banco de Dados SQLite
 class BancoHelper(context: android.content.Context):
-    SQLiteOpenHelper(context, "crudApp", null, 2) {
+    SQLiteOpenHelper(context, "crudApp", null, 3) {
 
 
     override fun onCreate(db: SQLiteDatabase) {
-        // criação da tabela
         db.execSQL(
-            "CREATE TABLE IF NOT EXISTS Pessoas (" +
+            "CREATE TABLE IF NOT EXISTS Alunos (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "nome TEXT, " +
                     "ra INTEGER, " +
@@ -30,14 +28,12 @@ class BancoHelper(context: android.content.Context):
 
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // se precisar recriar a tabela em futuras versões
-        db.execSQL("DROP TABLE IF EXISTS Pessoas")
+        db.execSQL("DROP TABLE IF EXISTS Alunos")
         onCreate(db)
     }
 }
 
 
-// Classe principal da Activity
 class MainActivity : AppCompatActivity() {
 
 
@@ -45,7 +41,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var banco: SQLiteDatabase
 
 
-    // elementos da tela
     private lateinit var editNome: EditText
     private lateinit var editRA: EditText
     private lateinit var editNota1: EditText
@@ -54,10 +49,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnAtualizar: Button
     private lateinit var btnDeletar: Button
     private lateinit var btnListar: Button
+    private lateinit var btnLimpar: Button
     private lateinit var listView: ListView
 
 
-    // para controlar item selecionado
     private var idSelecionado: Int? = null
     private lateinit var adapter: ArrayAdapter<String>
     private val listaItens = ArrayList<String>()
@@ -68,12 +63,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        // inicializando o banco
         bancoHelper = BancoHelper(this)
         banco = bancoHelper.writableDatabase
 
 
-        // ligando componentes da tela
         editNome = findViewById(R.id.editNome)
         editRA = findViewById(R.id.editRA)
         editNota1 = findViewById(R.id.editNota1)
@@ -83,23 +76,22 @@ class MainActivity : AppCompatActivity() {
         btnDeletar = findViewById(R.id.btnDeletar)
         btnListar = findViewById(R.id.btnListar)
         listView = findViewById(R.id.listView)
+        btnLimpar = findViewById(R.id.btnLimpar)
 
 
-        //adapter da ListView
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaItens)
+        adapter = ArrayAdapter(this, R.layout.list_item, R.id.textItem, listaItens)
         listView.adapter = adapter
 
 
-        // eventos
         btnInserir.setOnClickListener { inserir() }
         btnAtualizar.setOnClickListener { atualizar() }
         btnDeletar.setOnClickListener { deletar() }
         btnListar.setOnClickListener { listar() }
+        btnLimpar.setOnClickListener { limparLista()}
 
 
-        // selecionar item da lista
         listView.setOnItemClickListener { _, _, position, _ ->
-            val cursor = banco.rawQuery("SELECT * FROM Pessoas", null)
+            val cursor = banco.rawQuery("SELECT * FROM Alunos", null)
             if (cursor.moveToPosition(position)) {
                 idSelecionado = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 editNome.setText(cursor.getString(cursor.getColumnIndexOrThrow("nome")))
@@ -113,7 +105,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // CREATE
     private fun inserir() {
         val nome = editNome.text.toString()
         val ra = editRA.text.toString().toIntOrNull()
@@ -124,13 +115,13 @@ class MainActivity : AppCompatActivity() {
             val media = (nota1 + nota2) / 2
 
             val valores = ContentValues()
-                valores.put("nome", nome)
-                valores.put("ra", ra)
-                valores.put("nota1", nota1)
-                valores.put("nota2", nota2)
-                valores.put("media", media)
+            valores.put("nome", nome)
+            valores.put("ra", ra)
+            valores.put("nota1", nota1)
+            valores.put("nota2", nota2)
+            valores.put("media", media)
 
-            banco.insert("Pessoas", null, valores)
+            banco.insert("Alunos", null, valores)
             Toast.makeText(this, "Aluno cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
 
             limparCampos()
@@ -141,12 +132,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-    // Read
     private fun listar() {
         listaItens.clear()
-        val cursor: Cursor = banco.rawQuery("SELECT * FROM Pessoas", null)
+        val cursor: Cursor = banco.rawQuery("SELECT * FROM Alunos", null)
 
 
         if (cursor.moveToFirst()) {
@@ -171,7 +159,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // Update
     private fun atualizar() {
         if (idSelecionado != null) {
             val nome = editNome.text.toString()
@@ -189,7 +176,7 @@ class MainActivity : AppCompatActivity() {
                 valores.put("nota2", nota2)
                 valores.put("media", media)
 
-                banco.update("Pessoas", valores, "id=?", arrayOf(idSelecionado.toString()))
+                banco.update("Alunos", valores, "id=?", arrayOf(idSelecionado.toString()))
                 Toast.makeText(this, "Aluno atualizado com sucesso!", Toast.LENGTH_SHORT).show()
 
                 limparCampos()
@@ -201,7 +188,7 @@ class MainActivity : AppCompatActivity() {
     }
         private fun deletar() {
             if (idSelecionado != null) {
-                banco.delete("Pessoas", "id=?", arrayOf(idSelecionado.toString()))
+                banco.delete("Alunos", "id=?", arrayOf(idSelecionado.toString()))
                 Toast.makeText(this, "Aluno deletado com sucesso!", Toast.LENGTH_SHORT).show()
 
                 limparCampos()
@@ -211,7 +198,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        private fun limparCampos() {
+    private fun limparLista() {
+        if (adapter.count > 0) {
+            adapter.clear()
+            adapter.notifyDataSetChanged()
+            limparCampos()
+        }
+        limparCampos()
+    }
+
+
+    private fun limparCampos() {
             editNome.text.clear()
             editRA.text.clear()
             editNota1.text.clear()

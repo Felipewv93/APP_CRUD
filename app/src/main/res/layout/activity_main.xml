@@ -4,34 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1F1F1"
-    android:padding="16dp"
+    android:background="@drawable/layout_background"
+    android:padding="18dp"
     android:textAlignment="center"
     tools:context=".MainActivity">
 
-    <!-- Campo Nome -->
 
     <TextView
         android:id="@+id/titulo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:gravity="center_horizontal"
         android:padding="10dp"
         android:text="@string/app_titulo"
         android:textAlignment="center"
+        android:textColor="#9B009B"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="#0F0F0F"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Campo Nome -->
     <EditText
         android:id="@+id/editNome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="75dp"
         android:autofillHints="name"
         android:background="@android:drawable/edit_text"
         android:hint="@string/hint_nome"
@@ -103,7 +104,7 @@
         style="?android:attr/buttonBarStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,10 +118,11 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:backgroundTint="#00FF00"
+            android:backgroundTint="#09B900"
             android:text="@string/btn_inserir"
             android:textColor="#F1F1F1"
-            android:textColorLink="#262525" />
+            android:textColorLink="#262525"
+            android:textSize="18sp" />
 
 
         <Button
@@ -130,10 +132,11 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:backgroundTint="#0000FF"
+            android:backgroundTint="#0000BB"
             android:text="@string/btn_atualizar"
             android:textColor="#F1F1F1"
-            android:textColorLink="#262525" />
+            android:textColorLink="#262525"
+            android:textSize="18sp" />
 
 
         <Button
@@ -143,42 +146,63 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:backgroundTint="#FF0000"
+            android:backgroundTint="#BE0000"
             android:text="@string/btn_deletar"
             android:textColor="#F1F1F1"
-            android:textColorLink="#262525" />
+            android:textColorLink="#262525"
+            android:textSize="18sp" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnListar"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:layout_weight="1"
-        android:backgroundTint="#F190F1"
-        android:text="Listar Alunos"
-        android:textColor="#F1F1F1"
-        android:textSize="18sp"
+    <LinearLayout
+        android:id="@+id/buttonListBar"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonBar" />
+        app:layout_constraintTop_toBottomOf="@id/buttonBar">
 
+        <Button
+            android:id="@+id/btnListar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#3B115B"
+            android:text="@string/btn_listar"
+            android:textColor="#F1F1F1"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnLimpar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#555555"
+            android:text="@string/btn_limpar"
+            android:textColor="#F1F1F1"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <!-- Lista -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
-        android:padding="4dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnListar"
-        app:layout_constraintVertical_bias="0.0"/>
+        app:layout_constraintTop_toBottomOf="@id/buttonListBar"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,12 @@
     <string name="app_name">CrudTutorial</string>
     <string name="hint_nome">Nome</string>
     <string name="hint_ra">RA</string>
-    <string name="btn_inserir">Inserir</string>
+    <string name="btn_inserir">Cadastrar</string>
     <string name="btn_atualizar">Atualizar</string>
     <string name="btn_deletar">Deletar</string>
-    <string name="app_titulo">Cadastro de Alunos</string>
+    <string name="app_titulo">🧑‍🎓 Cadastro de Alunos 👩‍🎓</string>
     <string name="hint_ap1">Nota AP1</string>
     <string name="hint_ap2">Nota AP2</string>
+    <string name="btn_listar">Listar Alunos</string>
+    <string name="btn_limpar">Limpar</string>
 </resources>
