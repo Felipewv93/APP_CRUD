@@ -19,7 +19,7 @@
         android:padding="10dp"
         android:text="@string/app_titulo"
         android:textAlignment="center"
-        android:textColor="#9B009B"
+        android:textColor="#33EE55"
         android:textSize="30sp"
         android:textStyle="bold"
         android:visibility="visible"
@@ -172,7 +172,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:backgroundTint="#3B115B"
+            android:backgroundTint="#33BB33"
             android:text="@string/btn_listar"
             android:textColor="#F1F1F1"
             android:textSize="18sp" />
